@@ -1,0 +1,32 @@
+getgenv().zotiaxantaj = false
+getgenv().key = "c"
+getgenv().X = 68756
+getgenv().Y = 100
+getgenv().Z = -344
+
+game:GetService("RunService").Heartbeat:Connect(function()
+        if getgenv().zotiaxantaj then
+                local vel = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
+                game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(getgenv().X, getgenv().Y, getgenv().Z)
+                game:GetService("RunService").RenderStepped:Wait()
+                game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = vel
+        end
+end)
+
+game:GetService("Players").LocalPlayer:GetMouse().KeyDown:Connect(function(keyPressed)
+        if keyPressed == string.lower(getgenv().key) then
+                pcall(function()
+                        if getgenv().zotiaxantaj == false then
+                                getgenv().zotiaxantaj = true
+                                game.StarterGui:SetCore("SendNotification", {
+                                        Title = "ANTAJ-AJM",
+                                        Text = "ANTI WLACZONE" })
+                        elseif getgenv().zotiaxantaj == true then
+                                getgenv().zotiaxantaj = false
+                                game.StarterGui:SetCore("SendNotification", {
+                                        Title = "ANTAJ-AJM",
+                                        Text = "WYLACZONE" })
+                        end
+                end)
+        end
+end)
